@@ -1,7 +1,6 @@
 package com.core.chan;
 
 import com.core.chan.pattern.singleton.lazy.SafeSingleton;
-import com.core.chan.pattern.singleton.lazy.Singleton;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.ConcurrentHashMap;
