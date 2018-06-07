@@ -1,24 +1,23 @@
-package com.core.chan.pattern.singleton.lazy;
-
+package com.core.chan.pattern.singleton;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.IntStream;
 
-public class Singleton {
-	private static Singleton singleton;
-	private Singleton(){}
+public class SafeSingleton {
+	private static SafeSingleton safeSingleton;
+	private SafeSingleton(){}
 
-	public static Singleton getSingleton(){
-		singleton = null == singleton ? new Singleton() : singleton;
-		return singleton;
+	public static synchronized SafeSingleton getSingleton(){
+		safeSingleton = null == safeSingleton ? new SafeSingleton() : safeSingleton;
+		return safeSingleton;
 	}
 
-	public static void test(){
-		ConcurrentHashMap<Singleton, String> concurrentHashMap = new ConcurrentHashMap<>(32);
 
+	public static void test(){
+		ConcurrentHashMap<SafeSingleton, String> concurrentHashMap = new ConcurrentHashMap<>(32);
 		IntStream.range(0, 100000).parallel().forEach(index->{
-			Thread thread = new Thread(()->concurrentHashMap.put(Singleton.getSingleton(),
+			Thread thread = new Thread(()->concurrentHashMap.put(SafeSingleton.getSingleton(),
 					LocalDateTime.now().toString()));
 			thread.setName("sub thread : " + String.valueOf(index));
 			thread.start();
@@ -28,8 +27,9 @@ public class Singleton {
 				System.out.println(ex.getMessage());
 			}
 		});
+
 		long start = System.nanoTime();
-		IntStream.range(0, 100000).forEach(index->Singleton.getSingleton());
+		IntStream.range(0, 100000).forEach(index->SafeSingleton.getSingleton());
 		long end = System.nanoTime();
 		System.out.println(concurrentHashMap.size());
 		System.out.println(concurrentHashMap);
