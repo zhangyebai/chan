@@ -2,7 +2,7 @@ package com.core.chan.concurrent.bean;
 
 
 public class IntWrapper{
-	int value;
+	private int value;
 
 	public int getValue() {
 		return value;

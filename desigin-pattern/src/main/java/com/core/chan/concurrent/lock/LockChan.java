@@ -20,7 +20,7 @@ public class LockChan {
 			Thread thread = new Thread(()->{
 				try {
 					Thread.sleep(new Random().nextInt(500));
-				}catch (InterruptedException ex){
+				}catch (InterruptedException ignored){
 
 				}
 				lock.lock();

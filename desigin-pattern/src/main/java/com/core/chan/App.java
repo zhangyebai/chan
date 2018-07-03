@@ -1,17 +1,12 @@
 package com.core.chan;
 
 
-public class App {
+import com.core.chan.concurrent.condition.ConditionChan;
 
-	public static int value;
-	static {
-		value = 2;
-	}
-	public App(){
-		System.out.println(value);
-	}
+
+public class App {
 	public static void main(String[] args) {
-		App app = new App();
-		System.out.println(value);
+		ConditionChan.test();
+		System.out.println("end");
 	}
 }
