@@ -50,7 +50,8 @@ public class CountDownLatchChan {
 						e.printStackTrace();
 					}
 					return 0;
-				}).reduce(0, (sum, value)-> sum + value);
+				}).reduce(Long::sum).orElse(0);
+			//reduce(0, (sum, value)-> sum + value);
 		end = System.nanoTime();
 		System.out.println("Thread Pool count == " + sumCount + " nano time == " + (end - start));
 
