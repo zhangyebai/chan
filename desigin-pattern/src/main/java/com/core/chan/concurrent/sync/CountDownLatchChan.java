@@ -8,6 +8,15 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.IntStream;
 
+
+/**
+ * 等差数列的前N项和, 3种计算方法
+ * 1、单线程直接累加
+ * 2、线程池分片累加
+ * 3、CountDownLatch分片加锁累加
+ *
+ *
+ * */
 public class CountDownLatchChan {
 
 	public static void main(String[] args) {
@@ -20,7 +29,7 @@ public class CountDownLatchChan {
 	 * */
 	public static void test(){
 		System.out.println("---------------------------------------");
-		final int total = 1000_00;
+		final int total = 100_000;
 		final int slice = 2000;
 		long start = System.nanoTime();
 		long count = 0;
